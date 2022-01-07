@@ -13,14 +13,20 @@ def random_predict(number: int=1) -> int:
     limit2 = 101
     predict_number = np.random.randint(limit1, limit2)
         
-    while number != predict_number and limit1 != limit2:
+    while number != predict_number:
         print(f'number: {number}, predict_number: {predict_number} limit1: {limit1}, limit2: {limit2}')
         # Поскольку дебагинг не освоен в должным образом, можем отслеживать как ведёт себя рандом случайных чисел
         count += 1
+        if limit1 == limit2:
+            predict_number = limit1
+            break
         predict_number = np.random.randint(limit1, limit2)
         if number > predict_number:
             limit1 = predict_number + 1
         else:
             limit2 = predict_number - 1
-         
-    return count
+    
+    print(f'Ваше число {predict_number} угадано за {count} попыток (-ки, -у)')     
+    return count 
+   
+print(random_predict(np.random.randint(1, 101)))
